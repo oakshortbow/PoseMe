@@ -17,7 +17,6 @@ package com.soakay.animateme.math
  */
 
 import android.graphics.PointF
-import androidx.core.graphics.plus
 import kotlin.math.acos
 import kotlin.math.sqrt
 

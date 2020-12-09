@@ -6,6 +6,15 @@ import com.soakay.animateme.math.Angles
 import com.unity3d.player.UnityPlayer
 import com.unity3d.player.UnityPlayerActivity
 
+
+/**
+ * This class subclasses the UnityPlayerActivity provided by my built unity library
+ * I communicate to the unity script via an android bridge through a method called UnitySendMessage
+ * UnitySendMessage will access an empty GameObject called JointManipulator and access a method called ApplyAngleToJoint in that GameObject,
+ * as UnitySendMessage can only invoke methods with 1 String argument the 3rd argument represents the message to send
+ * I attach the name of the joint I want to manipulate as well as the angle I want to apply to the joint and ApplyAngleToJoint
+ * will interpret the string and apply the required transformations.
+ */
 class UnityRenderingActivity : UnityPlayerActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -34,6 +34,10 @@ import androidx.core.app.ActivityCompat
 import com.google.mlkit.vision.pose.defaults.PoseDetectorOptions
 import com.soakay.animateme.math.Angles
 
+/**
+This class handles setting the image,
+image rotating, and navigation the to the rendering activity
+ **/
 class MainActivity : AppCompatActivity() {
 
     private lateinit var imageView: ImageView

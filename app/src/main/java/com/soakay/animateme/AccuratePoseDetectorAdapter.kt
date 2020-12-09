@@ -34,6 +34,10 @@ import com.soakay.animateme.math.Angles
 import com.soakay.animateme.math.Vector
 import java.lang.Exception
 
+/**
+This class is an adapter class for the Pose Detection client, it handles computing of landmarks as well as setting Angles for
+ the Angles singleton.
+ **/
 class AccuratePoseDetectorAdapter(val context: Context, mode:Int, val overlay: GraphicOverlay) : OnSuccessListener<Pose>, OnFailureListener {
 
     private val client = PoseDetection.getClient(AccuratePoseDetectorOptions.Builder()
