@@ -23,7 +23,7 @@ import kotlin.math.sqrt
 /**
 Name: Aali Ansari
 Date: 2020/12/05
-Description: a class to represent a 2D vector, used to perform angle calculations, some methods and overloads are untested
+Description: a class to represent a 2D vector, used to perform angle calculations, some methods are untested
 **/
 
 class Vector(val point1: PointF, val point2: PointF) {
