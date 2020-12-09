@@ -1,2 +1,3 @@
+include ':unity-plugin'
 include ':app'
 rootProject.name = "AnimateMe"

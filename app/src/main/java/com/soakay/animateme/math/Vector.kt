@@ -29,57 +29,37 @@ Description: a class to represent a 2D vector, used to perform angle calculation
 
 class Vector(val point1: PointF, val point2: PointF) {
 
-    fun getXComponent(): Float {
-        return point2.x - point1.x
-    }
-
-    fun getYComponent(): Float {
-        return point2.y - point1.y
-    }
-
-    fun getMagnitude(): Float {
-        val x = getXComponent()
-        val y = getYComponent()
-        return sqrt(x*x + y*y)
-    }
+    val xComponent : Float = point2.x - point1.x
+    val yComponent : Float = point2.y - point1.y
+    val magnitude : Float =  sqrt(xComponent*xComponent + yComponent*yComponent)
+    val slope : Float = yComponent/xComponent
+    val yIntercept : Float = point1.y - point1.x * slope
 
     fun getDotProduct(v2: Vector): Float {
-        return getXComponent() * v2.getXComponent() + getYComponent() * v2.getYComponent()
+        return xComponent * v2.xComponent + yComponent * v2.yComponent
     }
 
     fun getRadians(v2: Vector) : Float {
-        return acos(getDotProduct(v2) / (getMagnitude() * v2.getMagnitude()))
+        return acos(getDotProduct(v2) / (magnitude * v2.magnitude))
     }
 
-    fun getAngle(v2: Vector): Float {
+    fun getAngle(v2: Vector, flip: Boolean): Float {
         var deg = Math.toDegrees(getRadians(v2).toDouble())
         if(v2.point1.y < v2.point2.y) {
              deg = 360 - deg
         }
-        if(getXComponent() > 0) {
+        if(flip) {
             deg = 360 - deg
         }
         return deg.toFloat()
     }
 
-    fun getSlope(): Float {
-        return getYComponent()/getXComponent()
-    }
-
-    fun getYIntercept() : Float {
-        return point1.y - point1.x * getSlope()
+    fun getAngle(v2: Vector): Float {
+        return getAngle(v2, false)
     }
 
     fun calculateY(x: Float) : Float {
-        return (getSlope() * x + getYIntercept())
-    }
-
-    operator fun Vector.plus(other: Vector): Vector = Vector(point1 + other.point1, point2 + other.point2)
-    operator fun Vector.times(other: Float) : Vector = Vector(PointF(point1.x * other, point1.y * other), PointF(point2.x * other, point2.y * other))
-    operator fun Vector.div(other: Float) : Vector = Vector(PointF(point1.x / other, point1.y/other), PointF(point2.x / other, point2.y / other))
-
-    fun normalize() : Vector {
-        return this / this.getMagnitude()
+        return (slope * x + yIntercept)
     }
 
     override fun toString() : String {

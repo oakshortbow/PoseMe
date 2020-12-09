@@ -32,6 +32,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.mlkit.vision.pose.defaults.PoseDetectorOptions
+import com.soakay.animateme.math.Angles
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,9 +40,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bitmap: Bitmap
     private lateinit var poseDetector: AccuratePoseDetectorAdapter
 
-    private val CAMERA_REQUEST = 1888
+    private val CAMERA_REQUEST = 1
     private val IMAGE_REQUEST = 0
-    private val MODEL_REQUEST = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +61,12 @@ class MainActivity : AppCompatActivity() {
     fun onButtonClick(view: View) {
         view.startAnimation(AnimationUtils.loadAnimation(this, R.animator.grow))
         when (view.id) {
-            R.id.modelViewerButton -> startActivity(Intent(this, RendererActivity::class.java))
+            R.id.modelViewerButton -> startActivity(Intent(this, UnityRenderingActivity::class.java).apply {
+                putExtra("rightShoulder", Angles.rightShoulderAngle)
+                putExtra("rightElbow", Angles.rightElbowAngle)
+                putExtra("leftShoulder", Angles.leftShoulderAngle)
+                putExtra("leftElbow", Angles.leftElbowAngle)
+            })
             R.id.cameraButton -> showCameraOptions()
             R.id.rotateButton -> rotateImage()
         }
@@ -81,8 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun Bitmap.rotate(degrees: Float): Bitmap {
-        val matrix = Matrix().apply { postRotate(degrees) }
-        return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
+        return Bitmap.createBitmap(this, 0, 0, width, height, Matrix().apply { postRotate(degrees) }, true)
     }
 
     private fun showCameraOptions() {

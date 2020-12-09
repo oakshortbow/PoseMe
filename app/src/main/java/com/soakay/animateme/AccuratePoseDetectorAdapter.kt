@@ -30,22 +30,18 @@ import com.google.mlkit.vision.pose.PoseLandmark
 import com.google.mlkit.vision.pose.accurate.AccuratePoseDetectorOptions
 import com.soakay.animateme.google.GraphicOverlay
 import com.soakay.animateme.google.PoseGraphic
+import com.soakay.animateme.math.Angles
 import com.soakay.animateme.math.Vector
 import java.lang.Exception
 import kotlin.properties.Delegates
 
-class AccuratePoseDetectorAdapter(val context: Context, val mode:Int, val overlay: GraphicOverlay) : OnSuccessListener<Pose>, OnFailureListener {
+class AccuratePoseDetectorAdapter(val context: Context, mode:Int, val overlay: GraphicOverlay) : OnSuccessListener<Pose>, OnFailureListener {
 
-    val client = PoseDetection.getClient(AccuratePoseDetectorOptions.Builder()
+    private val client = PoseDetection.getClient(AccuratePoseDetectorOptions.Builder()
         .setDetectorMode(mode)
         .build())
 
     lateinit var poses: Pose
-
-    var leftShoulderAngle by Delegates.notNull<Float>()
-    var leftElbowAngle by Delegates.notNull<Float>()
-    var rightShoulderAngle by Delegates.notNull<Float>()
-    var rightElbowAngle by Delegates.notNull<Float>()
 
     fun processBitmap(bitmap: Bitmap) : Task<Pose> {
         overlay.clear()
@@ -114,17 +110,10 @@ class AccuratePoseDetectorAdapter(val context: Context, val mode:Int, val overla
         val v5 = Vector(leftShoulder.position, leftElbow.position)
         val v6 = Vector(leftElbow.position, leftWrist!!.position )
 
-        println("ANGLES+=====")
-        rightShoulderAngle = v1.getAngle(v2)
-        rightElbowAngle = v2.getAngle(v3)
-        println(v1.getAngle(v2))
-        println(v2.getAngle(v3))
-
-        leftShoulderAngle = v4.getAngle(v5)
-        leftElbowAngle = v5.getAngle(v6)
-        println(v4.getAngle(v5))
-        println(v5.getAngle(v6))
-
+        Angles.rightShoulderAngle = v1.getAngle(v2)
+        Angles.rightElbowAngle = v2.getAngle(v3)
+        Angles.leftShoulderAngle = v4.getAngle(v5, true)
+        Angles.leftElbowAngle = v5.getAngle(v6, true)
     }
 
     override fun onFailure(p0: Exception) {

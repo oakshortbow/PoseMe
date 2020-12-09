@@ -27,6 +27,7 @@ import com.google.mlkit.vision.pose.PoseLandmark
 import java.util.*
 
 /** Draw the detected pose in preview.  */
+
 class PoseGraphic internal constructor(
   overlay: GraphicOverlay,
   private val pose: Pose,
