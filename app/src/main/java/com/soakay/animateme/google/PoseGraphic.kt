@@ -24,6 +24,7 @@ import android.graphics.Paint
 import android.graphics.PointF
 import com.google.mlkit.vision.pose.Pose
 import com.google.mlkit.vision.pose.PoseLandmark
+import com.soakay.animateme.math.Vector
 import java.util.*
 
 /** Draw the detected pose in preview.  */
@@ -107,9 +108,7 @@ class PoseGraphic internal constructor(
     // Right body
     drawLine(canvas, rightShoulder.position, rightElbow!!.position, rightPaint)
     drawLine(canvas, rightElbow.position, rightWrist!!.position, rightPaint)
-
     drawLine(canvas, rightShoulder.position, rightHip.position, rightPaint)
-
     drawLine(canvas, rightHip.position, rightKnee!!.position, rightPaint)
     drawLine(canvas, rightKnee.position, rightAnkle!!.position, rightPaint)
     drawLine(canvas, rightWrist.position, rightThumb!!.position, rightPaint)

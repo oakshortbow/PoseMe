@@ -33,7 +33,6 @@ import com.soakay.animateme.google.PoseGraphic
 import com.soakay.animateme.math.Angles
 import com.soakay.animateme.math.Vector
 import java.lang.Exception
-import kotlin.properties.Delegates
 
 class AccuratePoseDetectorAdapter(val context: Context, mode:Int, val overlay: GraphicOverlay) : OnSuccessListener<Pose>, OnFailureListener {
 
@@ -110,10 +109,25 @@ class AccuratePoseDetectorAdapter(val context: Context, mode:Int, val overlay: G
         val v5 = Vector(leftShoulder.position, leftElbow.position)
         val v6 = Vector(leftElbow.position, leftWrist!!.position )
 
+        val v7 = Vector(rightHip!!.position, PointF(rightHip.position.x, rightKnee.position.y))
+        val v8 = Vector(rightHip.position, rightKnee.position)
+        val v9 = Vector(rightKnee.position, rightAnkle!!.position )
+
+        val v10 = Vector(leftHip!!.position, PointF(leftHip.position.x, leftKnee.position.y))
+        val v11 = Vector(leftHip.position, leftKnee.position)
+        val v12 = Vector(leftKnee.position, leftAnkle!!.position )
+
         Angles.rightShoulderAngle = v1.getAngle(v2)
         Angles.rightElbowAngle = v2.getAngle(v3)
+
         Angles.leftShoulderAngle = v4.getAngle(v5, true)
         Angles.leftElbowAngle = v5.getAngle(v6, true)
+
+        Angles.rightLegAngle = v7.getAngle(v8, true)
+        Angles.rightKneecapAngle = v8.getAngle(v9, true)
+
+        Angles.leftLegAngle = v10.getAngle(v11)
+        Angles.leftKneecapAngle= v11.getAngle(v12)
     }
 
     override fun onFailure(p0: Exception) {

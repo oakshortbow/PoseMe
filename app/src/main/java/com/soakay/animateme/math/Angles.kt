@@ -21,4 +21,8 @@ object Angles {
     var leftElbowAngle : Float = 0f
     var rightShoulderAngle : Float = 0f
     var rightElbowAngle : Float = 0f
+    var rightLegAngle : Float = 0f
+    var rightKneecapAngle : Float = 0f
+    var leftLegAngle: Float = 0f
+    var leftKneecapAngle: Float = 0f
 }

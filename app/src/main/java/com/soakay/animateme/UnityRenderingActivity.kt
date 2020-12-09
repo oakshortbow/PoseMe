@@ -34,6 +34,27 @@ class UnityRenderingActivity : UnityPlayerActivity() {
                 "ApplyAngleToJoint",
                 "rightElbow:" + intent.getFloatExtra("rightElbow", 0.0f)
         )
+
+        UnityPlayer.UnitySendMessage(
+            "JointManipulator",
+            "ApplyAngleToJoint",
+            "leftLeg:" + intent.getFloatExtra("leftLeg", 0.0f)
+        )
+        UnityPlayer.UnitySendMessage(
+            "JointManipulator",
+            "ApplyAngleToJoint",
+            "rightLeg:" + intent.getFloatExtra("rightLeg", 0.0f)
+        )
+        UnityPlayer.UnitySendMessage(
+            "JointManipulator",
+            "ApplyAngleToJoint",
+            "rightKneecap:" + intent.getFloatExtra("leftKneecap", 0.0f)
+        )
+        UnityPlayer.UnitySendMessage(
+            "JointManipulator",
+            "ApplyAngleToJoint",
+            "leftKneecap:" + intent.getFloatExtra("rightKneecap", 0.0f)
+        )
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
